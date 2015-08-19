@@ -13,6 +13,12 @@
       "required": true,
       "description": "uri or path to connect to"
     },
+    "disconnectedAfter": {
+      "type": "number",
+      "required": false,
+      "dafault": 5,
+      "description": "number of attempts until 'discconnected' event can be emitted"
+    },
     "multiplex": "See multiplexer options schema.",
     "backoff": "See backoff options schema."
   }
@@ -40,8 +46,8 @@
 ## A message.
 
 - Every time you want to send a message to the server, you just add it to multiplexer.
-- Ever time multiplexer emits a `messages event - you send all messages, passed along this event.
-- User can be notified when message is delivered. For this an 'ack' message needs to be subscribed and received.
+- Ever time multiplexer emits a `messages` event - you send all messages, passed along this event.
+- User can be notified when message is delivered. For this an `ack` message needs to be subscribed and received.
 
 User messages are of type `user` and can contain any data defined by user.
 
@@ -79,7 +85,7 @@ Is an `ack` type of messages used to ensure stable messages delivering. This is 
 
 Multiplexing is needed to lower the load on the client and server by reducing the amount of requests. Multiplexer as layer where messages are accumulated.
 
-### Options:
+Options:
 
 ```json
 {
@@ -148,6 +154,7 @@ Options:
     }
   }
 }
+```
 
 Example:
 
@@ -158,12 +165,14 @@ ms = Math.min(ms, max)
 
 ## Handling received messages.
 
-- Create an ack message for every user message and add it to multiplexer.
+- Create an ack message for every received user message and add it to multiplexer.
 - Emit a `message` event for every user message and pass the message as an argument.
-- If there are messages of type 'ack', callbacks waiting for those acks need to be called.
+- If there are messages of type `ack`, callbacks waiting for those acks need to be called.
 
 ## Connected and disconnected.
 
 Client should emit `connected` and `disconnected` events. Due to the nature of polling approach, closed connection doesn't mean disconnection.
 
-Client needs to implement a `disconnectedAfter` option, `5` by default. Which means that only after 5 failed in the row attemts to open a connection client will emit `disconnected`. Also client should NOT emit `disconnected` if it is not connected and it should NOT emit `connected` if it is already connected.
+Client should emit `disconnected` only after `disconnectedAfter` amount of failed attempts is reached.
+
+Also client should NOT emit `disconnected` if it is not connected and it should NOT emit `connected` if it is already connected.
