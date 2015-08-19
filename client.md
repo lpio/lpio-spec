@@ -19,7 +19,7 @@
       "dafault": 5,
       "description": "number of attempts until 'discconnected' event can be emitted"
     },
-    "multiplex": "See multiplexer options schema.",
+    "multiplex": "See multiplexer.md options schema.",
     "backoff": "See backoff options schema."
   }
 }

@@ -23,3 +23,9 @@ Consider also:
 [Server spec](./server.md)
 
 [Reference server implementation in node](https://github.com/lpio/server-node)
+
+## Multiplexer
+
+Is identical for the server and client.
+
+[spec](./multiplexer.md)
