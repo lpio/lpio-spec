@@ -44,7 +44,7 @@ User messages are of type `user` and can contain any data defined by user.
 {
   "type": "user",
   "id": "{unique message id}",
-  "body": "{any data structure}"
+  "body": {"anyData": true}
 }
 ```
 
