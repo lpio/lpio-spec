@@ -171,7 +171,7 @@ ms = Math.min(ms, max)
 
 Client should emit `connected` and `disconnected` events. Due to the nature of polling approach, closed connection doesn't mean disconnection.
 
-Client should emit `disconnected` only after it tailed `disconnectedAfter` amount of times.
+Client should emit `disconnected` only after it tailed amount of times defined by  `disconnectedAfter`.
 
 Client should only emit `disconnected` if it was connected before.
 
