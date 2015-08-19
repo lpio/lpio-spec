@@ -28,4 +28,4 @@ Consider also:
 
 Is identical for the server and client.
 
-[spec](./multiplexer.md)
+[Spec](./multiplexer.md)
