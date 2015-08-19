@@ -26,7 +26,7 @@ Consider also:
 ```
     Accept: application/json
     Content-Type: application/json;charset=UTF-8
-``
+```
 - Method - `POST
 - JSON Body
     - `client` - a string that definitely identifies the client. Required!
