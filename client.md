@@ -89,37 +89,6 @@ User messages are of type `user` and can contain any data defined by user.
 Is an `ack` type of messages used to ensure stable messages delivering. This is the only way how we can ensure that a message has been really delivered.
 
 
-## Multiplexing.
-
-Multiplexing is needed to lower the load on the client and server by reducing the amount of requests. Multiplexer as layer where messages are accumulated.
-
-Options:
-
-```json
-{
-  "title": "Multiplexer options",
-  "type": "object",
-  "required": false,
-  "properties": {
-    "duration": {
-      "type": "number",
-      "default": 500,
-      "required": false,
-      "description": "multiplex duration in ms"
-    }
-  }
-}
-```
-
-Multiplexer implements:
-- `add` a message.
-- `get` all `messages`.
-- `reset` when you want it to forget all messages.
-
-Multiplexer will periodically:
-- reset messages store
-- emit `messages` event with messages as an argument, when `duration` is over and there are messages to be send.
-
 ## Handling errors.
 
 We need to be aware that connection can be closed due to lots of different reasons: broken internet connection, server death or some transportation issues in between.
