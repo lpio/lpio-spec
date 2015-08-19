@@ -42,9 +42,9 @@ User messages are of type `user` and can contain any data defined by user.
 
 ```json
 {
-  type: 'user',
-  id: 'unique message id',
-  body: {anything}
+  "type": "user",
+  "id": "{unique message id}",
+  "body": "{any data structure}"
 }
 ```
 
@@ -56,8 +56,8 @@ Acknowledgement messages are message objects of type `ack`.
 
 ```json
 {
-  type: 'ack',
-  id: 'unique message id'
+  "type": "ack",
+  "id": "{unique message id}"
 }
 ```
 
