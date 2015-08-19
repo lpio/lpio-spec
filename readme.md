@@ -17,3 +17,9 @@ Consider also:
 [Client spec](./client.md)
 
 [Reference client implementation in javascript](https://github.com/lpio/client-js)
+
+## Server
+
+[Server spec](./server.md)
+
+[Reference server implementation in node](https://github.com/lpio/server-node)

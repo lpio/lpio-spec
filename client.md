@@ -1,3 +1,55 @@
+## Creating a client.
+
+- Client should be emitter.
+- Client should accept options:
+
+```json
+{
+  "title": "Client options schema",
+  "type": "object",
+  "properties": {
+    "uri": {
+      "type": "string",
+      "required": true,
+      "description": "uri or path to connect to"
+    },
+    "multiplex": {
+      "type": "object",
+      "required": false,
+      "description": "multiplexer options",
+      "properties": {
+        "duration": {
+          "type": "number",
+          "required": false,
+          "description": "multiplex duration in ms"
+        }
+      }
+    },
+    "backoff": {
+      "type": "object",
+      "required": false,
+      "properties": {
+        "min": {
+          "type": "number",
+          "required": false,
+          "description": "minimal delay until next request"
+        },
+        "max": {
+          "type": "number",
+          "required": false,
+          "description": "maximal delay until next request"
+        },
+        "factor": {
+          "type": "number",
+          "required": false,
+          "description": "factor considered for backoff calculation"
+        }
+      }
+    }
+  }
+}
+```
+
 ## Opening a connection.
 
 - Ensure to open only one connection at time.
@@ -19,7 +71,7 @@
 ## User messages.
 
 - Every time you want to send a message to the server, you just add it to multiplexer.
-- Ever time multiplexer emits a 'messages' event - you send all messages.
+- Ever time multiplexer emits a `messages event - you send all messages, passed along this event.
 - User can be notified when message is delivered. For this an 'ack' message needs to be subscribed and received.
 
 User messages are of type `user` and can contain any data defined by user.
@@ -66,7 +118,7 @@ We need to be aware that connection can be closed due to lots of different reaso
 
 Client should handle any connection errors the same way:
 
-- Put unsent user and ack messages back to multiplexer.
+- Add unsent user and ack messages back to multiplexer.
 - Reopen connection.
 
 ## Reconnection backoff.
@@ -97,4 +149,4 @@ ms = Math.min(ms, max)
 
 Client should emit `connected` and `disconnected` events. Due to the nature of polling approach, closed connection doesn't mean disconnection.
 
-Client needs to implement a `disconnectedAfter` option, `5` by default. Which means that only after 5 attemts to open a connection client will emit `disconnected`. Also client should NOT emit `disconnected` if it is not connected and it should NOT emit `connected` if it is already connected.
+Client needs to implement a `disconnectedAfter` option, `5` by default. Which means that only after 5 failed in the row attemts to open a connection client will emit `disconnected`. Also client should NOT emit `disconnected` if it is not connected and it should NOT emit `connected` if it is already connected.
