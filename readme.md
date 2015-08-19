@@ -27,7 +27,7 @@ Consider also:
     Accept: application/json
     Content-Type: application/json;charset=UTF-8
 ```
-- Method - `POST
+- Method - `POST`
 - JSON Body
     - `client` - a string that definitely identifies the client. Required!
     - `messages` - an array of messages client needs to send to the server, empty array by default.
