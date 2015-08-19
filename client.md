@@ -72,8 +72,8 @@ Client implements:
 
 ## A message.
 
-- Every time you want to send a message to the server, you just add it to multiplexer.
-- Ever time multiplexer emits a `messages` event - you send all messages, passed along this event.
+- Every time you want to send a message to the server, just add it to multiplexer.
+- Every time multiplexer emits a `messages` event - send all messages, passed with this event.
 - User can be notified when message is delivered. For this an `ack` message needs to be subscribed and received.
 
 User messages are of type `user` and can contain any data defined by user.
@@ -167,10 +167,12 @@ ms = Math.min(ms, max)
 - Emit a `message` event for every user message and pass the message as an argument.
 - If there are messages of type `ack`, callbacks waiting for those acks need to be called.
 
-## Connected and disconnected.
+## Emitting connected and disconnected.
 
 Client should emit `connected` and `disconnected` events. Due to the nature of polling approach, closed connection doesn't mean disconnection.
 
-Client should emit `disconnected` only after `disconnectedAfter` amount of failed attempts is reached.
+Client should emit `disconnected` only after it tailed `disconnectedAfter` amount of times.
 
-Also client should NOT emit `disconnected` if it is not connected and it should NOT emit `connected` if it is already connected.
+Client should only emit `disconnected` if it was connected before.
+
+Client should only emit `connected` if it was disconnected before.
