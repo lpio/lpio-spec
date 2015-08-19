@@ -31,8 +31,8 @@ Client implements:
 - `connect` first time connect, should be done only once
 - `disconnect` abort connection, stop reconnecting
 - `open` opens the request, sends/receives data
-- `send` schedules data
-- `reopen` calls `open` using backoff
+- `send` schedules message to send
+- `reopen` calls `open` using a backoff stratagy
 
 ## Opening a connection.
 
