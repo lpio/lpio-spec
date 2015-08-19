@@ -1,7 +1,6 @@
 ## Creating a client.
 
-- Client should be emitter.
-- Client should accept options:
+Options:
 
 ```json
 {
@@ -24,6 +23,8 @@
   }
 }
 ```
+
+Client should be emitter.
 
 Client implements:
 
