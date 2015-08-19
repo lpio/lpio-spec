@@ -13,39 +13,8 @@
       "required": true,
       "description": "uri or path to connect to"
     },
-    "multiplex": {
-      "type": "object",
-      "required": false,
-      "description": "multiplexer options",
-      "properties": {
-        "duration": {
-          "type": "number",
-          "required": false,
-          "description": "multiplex duration in ms"
-        }
-      }
-    },
-    "backoff": {
-      "type": "object",
-      "required": false,
-      "properties": {
-        "min": {
-          "type": "number",
-          "required": false,
-          "description": "minimal delay until next request"
-        },
-        "max": {
-          "type": "number",
-          "required": false,
-          "description": "maximal delay until next request"
-        },
-        "factor": {
-          "type": "number",
-          "required": false,
-          "description": "factor considered for backoff calculation"
-        }
-      }
-    }
+    "multiplex": "See multiplexer options schema.",
+    "backoff": "See backoff options schema."
   }
 }
 ```
@@ -68,7 +37,7 @@
     - `client` - a string that definitely identifies the client. Required!
     - `messages` - an array of messages client needs to send to the server, empty array by default.
 
-## User messages.
+## A message.
 
 - Every time you want to send a message to the server, you just add it to multiplexer.
 - Ever time multiplexer emits a `messages event - you send all messages, passed along this event.
@@ -78,30 +47,55 @@ User messages are of type `user` and can contain any data defined by user.
 
 ```json
 {
-  "type": "user",
-  "id": "{unique message id}",
-  "body": {"anyData": true}
+  "title": "User message",
+  "type": "obejct",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["user", "ack"],
+      "required": true,
+      "description": "message type"
+    },
+    "id": {
+      "type": "string",
+      "required": true,
+      "description": "unique message id"
+    },
+    "body": {
+      "type": "instance",
+      "required": false,
+      "description": "any kind of data"
+    }
+  }
 }
 ```
 
 ## Acknowledgments.
 
-To ensure stable messages delivering we send confirmations to the sender. This is the only way how we can ensure that a message has been really delivered.
+Is an `ack` type of messages used to ensure stable messages delivering. This is the only way how we can ensure that a message has been really delivered.
 
-Acknowledgement messages are message objects of type `ack`.
-
-```json
-{
-  "type": "ack",
-  "id": "{unique message id}"
-}
-```
 
 ## Multiplexing.
 
 Multiplexing is needed to lower the load on the client and server by reducing the amount of requests. Multiplexer as layer where messages are accumulated.
 
-Default multiplex `duration` is `500ms`. This should be a customizable option.
+### Options:
+
+```json
+{
+  "title": "Multiplexer options",
+  "type": "object",
+  "required": false,
+  "properties": {
+    "duration": {
+      "type": "number",
+      "default": 500,
+      "required": false,
+      "description": "multiplex duration in ms"
+    }
+  }
+}
+```
 
 Multiplexer implements:
 - `add` a message.
@@ -127,10 +121,33 @@ Every time we try to open a connection it might fail. To avoid high server and c
 
 A reference implementation is [backoff](https://github.com/mokesmokes/backo2).
 
-Options a backoff needs to implement:
-- `min` - minimal delay, 100 by default
-- `max` - maximal delay, 10000 by default
-- `factor` - factor which is used for calculation, 2 by default
+Options:
+
+```json
+{
+  "type": "object",
+  "required": false,
+  "properties": {
+    "min": {
+      "type": "number",
+      "required": false,
+      "default": 100,
+      "description": "minimal delay until next request"
+    },
+    "max": {
+      "type": "number",
+      "required": false,
+      "default": 10000,
+      "description": "maximal delay until next request"
+    },
+    "factor": {
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "factor considered for backoff calculation"
+    }
+  }
+}
 
 Example:
 
