@@ -57,7 +57,7 @@ Client implements:
   "properties": {
     "client": {
       "type": "string",
-      "required": true
+      "required": true,
       "description": "a string that definitely identifies the client"
     },
     "messages": {
