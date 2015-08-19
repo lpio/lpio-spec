@@ -4,6 +4,7 @@ Options
 
 ```json
 {
+  "id": "/server/options",
   "title": "Server options",
   "properties": {
     "ackTimeout": {
@@ -21,11 +22,11 @@ Options
       "default": 40000,
       "description": "amount of ms until client becomes disconnected if no connection happened during this period"
     },
-    "multiplex": "See multiplexer.md options schema.",
+    "multiplex": {"$ref": "/multiplexer/options"},
   }
 }
 ```
 
 Server should be emitter.
 
-Client should implement:
+Server should implement:

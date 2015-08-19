@@ -18,8 +18,8 @@ Options:
       "dafault": 5,
       "description": "number of attempts until 'discconnected' event can be emitted"
     },
-    "multiplex": "See multiplexer.md options schema.",
-    "backoff": "See backoff options schema."
+    "multiplex": {"$ref": "/multiplexer/options"},
+    "backoff": {"$ref": "/backoff/options"}
   }
 }
 ```
@@ -49,8 +49,26 @@ Client implements:
 ```
 - Method - `POST`
 - JSON Body
-    - `client` - a string that definitely identifies the client. Required!
-    - `messages` - an array of messages client needs to send to the server, empty array by default.
+
+```json
+{
+  "title": "Request body",
+  "type": "object",
+  "properties": {
+    "client": {
+      "type": "string",
+      "required": true
+      "description": "a string that definitely identifies the client"
+    },
+    "messages": {
+      "type": "array",
+      "required": true,
+      "description": "messages client needs to send to the server, empty",
+      "items": {"$ref": "/message"}
+    }
+  }
+}
+```
 
 ## A message.
 
@@ -62,6 +80,7 @@ User messages are of type `user` and can contain any data defined by user.
 
 ```json
 {
+  "id": "/message",
   "title": "User message",
   "type": "obejct",
   "properties": {
@@ -109,6 +128,7 @@ Options:
 
 ```json
 {
+  "id": "/backoff/options",
   "type": "object",
   "required": false,
   "properties": {

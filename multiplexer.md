@@ -6,6 +6,7 @@ Options:
 
 ```json
 {
+  "id": "/multiplexer/options",
   "title": "Multiplexer options",
   "type": "object",
   "required": false,
