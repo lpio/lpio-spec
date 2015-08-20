@@ -1,6 +1,6 @@
 ## Multiplexing.
 
-Multiplexing is needed to lower the load on the client and server by reducing the amount of requests. Multiplexer as layer where messages are accumulated.
+Multiplexing is needed to lower the load on the client and server by reducing the amount of requests. Multiplexer as layer where messages are accumulated and dispatched periodically.
 
 Options:
 
@@ -22,10 +22,10 @@ Options:
 ```
 
 Multiplexer implements:
-- `add` a message.
-- `get` all `messages`.
-- `reset` when you want it to forget all messages.
+- `add` add a message.
+- `get` get all `messages`.
+- `reset` forget all messages.
 
-Multiplexer will periodically:
+Multiplexer will periodically automatically:
 - reset messages store
-- emit `messages` event with messages as an argument, when `duration` is over and there are messages to be send.
+- emit `drain` event with messages as an argument, when `duration` is over and there are messages to be send.

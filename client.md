@@ -73,7 +73,7 @@ Client implements:
 ## A message.
 
 - Every time you want to send a message to the server, just add it to multiplexer.
-- Every time multiplexer emits a `messages` event - send all messages, passed with this event.
+- Every time multiplexer emits a `drain` event - send all messages, passed with this event.
 - User can be notified when message is delivered. For this an `ack` message needs to be subscribed and received.
 
 User messages are of type `user` and can contain any data defined by user.
