@@ -1,28 +1,6 @@
 ## Creating a client.
 
-Options:
-
-```json
-{
-  "title": "Client options schema",
-  "type": "object",
-  "properties": {
-    "uri": {
-      "type": "string",
-      "required": true,
-      "description": "uri or path to connect to"
-    },
-    "disconnectedAfter": {
-      "type": "number",
-      "required": false,
-      "dafault": 5,
-      "description": "number of attempts until 'discconnected' event can be emitted"
-    },
-    "multiplex": {"$ref": "/multiplexer/options"},
-    "backoff": {"$ref": "/backoff/options"}
-  }
-}
-```
+Client accepts options, [schema](./client-options.json).
 
 Client should be emitter.
 
@@ -31,7 +9,7 @@ Client implements:
 - `connect` first time connect, should be done only once
 - `disconnect` abort connection, stop reconnecting
 - `open` opens the request, sends/receives data
-- `send` schedules message to send
+- `send` schedules message to send, subscribes ack is callback is passed
 - `reopen` calls `open` using a backoff stratagy
 
 ## Opening a connection.
@@ -48,27 +26,7 @@ Client implements:
     Content-Type: application/json;charset=UTF-8
 ```
 - Method - `POST`
-- JSON Body
-
-```json
-{
-  "title": "Request body",
-  "type": "object",
-  "properties": {
-    "client": {
-      "type": "string",
-      "required": true,
-      "description": "a string that definitely identifies the client"
-    },
-    "messages": {
-      "type": "array",
-      "required": true,
-      "description": "messages client needs to send to the server, empty",
-      "items": {"$ref": "/message"}
-    }
-  }
-}
-```
+- JSON body [schema](./client-request-body.json)
 
 ## A message.
 
@@ -76,33 +34,9 @@ Client implements:
 - Every time multiplexer emits a `drain` event - send all messages, passed with this event.
 - User can be notified when message is delivered. For this an `ack` message needs to be subscribed and received.
 
-User messages are of type `user` and can contain any data defined by user.
 
-```json
-{
-  "id": "/message",
-  "title": "User message",
-  "type": "obejct",
-  "properties": {
-    "type": {
-      "type": "string",
-      "enum": ["user", "ack"],
-      "required": true,
-      "description": "message type"
-    },
-    "id": {
-      "type": "string",
-      "required": true,
-      "description": "unique message id"
-    },
-    "body": {
-      "type": "instance",
-      "required": false,
-      "description": "any kind of data"
-    }
-  }
-}
-```
+[schema](./message.json)
+
 
 ## Acknowledgments.
 
@@ -124,35 +58,7 @@ Every time we try to open a connection it might fail. To avoid high server and c
 
 A reference implementation is [backoff](https://github.com/mokesmokes/backo2).
 
-Options:
-
-```json
-{
-  "id": "/backoff/options",
-  "type": "object",
-  "required": false,
-  "properties": {
-    "min": {
-      "type": "number",
-      "required": false,
-      "default": 100,
-      "description": "minimal delay until next request"
-    },
-    "max": {
-      "type": "number",
-      "required": false,
-      "default": 10000,
-      "description": "maximal delay until next request"
-    },
-    "factor": {
-      "type": "number",
-      "required": false,
-      "default": 2,
-      "description": "factor considered for backoff calculation"
-    }
-  }
-}
-```
+Options [schema](./client-backoff-options.json)
 
 Example:
 

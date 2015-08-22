@@ -1,0 +1,15 @@
+{
+  "id": "/client-request-body",
+  "title": "Request body schema.",
+  "type": "object",
+  "properties": {
+    "client": {"$ref": "/client-options#id"},
+    "messages": {
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Messages array.",
+      "items": {"$ref": "/message"}
+    }
+  }
+}

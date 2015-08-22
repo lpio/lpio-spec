@@ -1,0 +1,14 @@
+{
+  "id": "/server-request-open-params",
+  "type": "object",
+    "properties":  {
+      "user": {
+        "type": "string",
+        "required": true,
+        "description": "Unique user id, used to subscribe messages."
+      },
+      "client": {"$ref": "/client-options#id"},
+      "messages": {"$ref": "/client-request-body#messages"}
+    }
+  }
+}

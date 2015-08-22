@@ -1,0 +1,26 @@
+{
+  "id": "/client-options",
+  "title": "Client options schema.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "required": true,
+      "description": "A definite unique client identifier."
+    },
+    "uri": {
+      "type": "string",
+      "required": false,
+      "default": "/lpio",
+      "description": "Uri or path the server will accept request from."
+    },
+    "disconnectedAfter": {
+      "type": "number",
+      "required": false,
+      "dafault": 5,
+      "description": "A number of attempts until 'discconnected' event will be emitted."
+    },
+    "multiplex": {"$ref": "/multiplexer-options"},
+    "backoff": {"$ref": "/client-backoff-options"}
+  }
+}

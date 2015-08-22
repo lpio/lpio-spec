@@ -1,0 +1,26 @@
+{
+  "id": "/client-backoff-options",
+  "title": "Backoff options schema.",
+  "type": "object",
+  "required": false,
+  "properties": {
+    "min": {
+      "type": "number",
+      "required": false,
+      "default": 100,
+      "description": "Minimal delay until next request."
+    },
+    "max": {
+      "type": "number",
+      "required": false,
+      "default": 10000,
+      "description": "Maximal delay until next request."
+    },
+    "factor": {
+      "type": "number",
+      "required": false,
+      "default": 2,
+      "description": "Factor considered for backoff calculation."
+    }
+  }
+}

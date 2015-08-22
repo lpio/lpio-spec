@@ -1,0 +1,14 @@
+{
+  "id": "/multiplexer-options",
+  "title": "Multiplexer options",
+  "type": "object",
+  "required": false,
+  "properties": {
+    "duration": {
+      "type": "number",
+      "default": 200,
+      "required": false,
+      "description": "Multiplex duration in ms."
+    }
+  }
+}
