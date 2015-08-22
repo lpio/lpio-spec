@@ -1,6 +1,6 @@
 ## Creating a server.
 
-Options [schema](./server-options.json).
+Options [schema](./schemas/server-options.json).
 
 Server should be emitter.
 
@@ -15,7 +15,7 @@ Server implements:
 
 Request can be accepted from any URI used by the client. Incomming `POST` request has always a json encoded body.
 
-Request handler calls `open` method which accepts params with [schema](./server-request-open-params.json)
+Request handler calls `open` method which accepts params with [schema](./schemas/server-request-open-params.json)
 
 Method `open` will:
 - send new messages

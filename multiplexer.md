@@ -2,7 +2,7 @@
 
 Multiplexing is needed to lower the load on the client and server by reducing the amount of requests. Multiplexer is a layer where messages are accumulated and dispatched periodically.
 
-Options [schema](./multiplexer-options.json).
+Options [schema](./schemas/multiplexer-options.json).
 
 Multiplexer implements:
 - `add` add a message.

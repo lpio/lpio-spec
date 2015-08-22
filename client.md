@@ -1,6 +1,6 @@
 ## Creating a client.
 
-Client accepts options, [schema](./client-options.json).
+Client accepts options, [schema](./schemas/client-options.json).
 
 Client should be emitter.
 
@@ -26,7 +26,7 @@ Client implements:
     Content-Type: application/json;charset=UTF-8
 ```
 - Method - `POST`
-- JSON body [schema](./client-request-body.json)
+- JSON body [schema](./schemas/client-request-body.json)
 
 ## A message.
 
@@ -35,7 +35,7 @@ Client implements:
 - User can be notified when message is delivered. For this an `ack` message needs to be subscribed and received.
 
 
-[schema](./message.json)
+[schema](./schemas/message.json)
 
 
 ## Acknowledgments.
@@ -58,7 +58,7 @@ Every time we try to open a connection it might fail. To avoid high server and c
 
 A reference implementation is [backoff](https://github.com/mokesmokes/backo2).
 
-Options [schema](./client-backoff-options.json)
+Options [schema](./schemas/client-backoff-options.json)
 
 Example:
 
