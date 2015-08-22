@@ -1,6 +1,6 @@
 ## Creating a server.
 
-Options [schema](./schemas/server-options.json).
+Server options [schema](./schemas/server-options.json).
 
 Server should be emitter.
 
