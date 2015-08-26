@@ -17,7 +17,7 @@ LPIO is designed for scalable stateless architecture.
 1. Client waits for a response, until it gets one - request remains open.
 1. Client aborts currently waiting request to send new messages.
 1. After a successfully finished request client creates another one.
-1. After a failed request client reconnects using a backoff logic ([backoff options](./schemas/client-backoff-options.json)). A reference implementation is [backoff](https://github.com/segmentio/backo).
+1. After a failed request client resends a request using a backoff logic ([backoff options](./schemas/client-backoff-options.json)). A reference implementation is [backoff](https://github.com/segmentio/backo).
 1. Client is disconnected when backoff duration reached the `max` value.
 1. Client is connected when a request was successfull.
 1. Client sends ping request if no message has been received within `pingInterval` option.
@@ -35,4 +35,4 @@ LPIO is designed for scalable stateless architecture.
 1. Server accumulates messages to reduce amount of requests ([multiplexer options](./schemas/multiplexer-options.json))
 1. Message is a json defined by this [schema](./schemas/message.json)
 1. The knowledge about connected/disconnected users is not part of LPIO server.
-1. There is noseparate handshake requests, every request has client and user id's.
+1. There is noseparate handshake requests, every request has client id and user id and evtl. sid.
