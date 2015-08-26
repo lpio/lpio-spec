@@ -1,5 +1,5 @@
 {
-  "id": "/client-options",
+  "id": "/client-options.json",
   "title": "Client options schema.",
   "type": "object",
   "properties": {
@@ -31,7 +31,7 @@
       "default": 25000,
       "description": "Interval in ms a ping message will be scheduled to maintain connected/disconnected state."
     },
-    "multiplex": {"$ref": "/multiplexer-options"},
-    "backoff": {"$ref": "/client-backoff-options"}
+    "multiplex": {"$ref": "/multiplexer-options.json"},
+    "backoff": {"$ref": "/client-backoff-options.json"}
   }
 }

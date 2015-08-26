@@ -1,5 +1,5 @@
 {
-  "id": "/message",
+  "id": "/message.json",
   "title": "Message schema.",
   "type": "obejct",
   "properties": {
@@ -14,8 +14,8 @@
       "required": true,
       "description": "Unique message identifier."
     },
-    "client": {"$ref": "/client-options#id"},
-    "sender": {"$ref": "/client-options#user"},
+    "client": {"$ref": "/client-options.json#id"},
+    "sender": {"$ref": "/client-options.json#user"},
     "recipient": {
       "type": "string",
       "required": true,

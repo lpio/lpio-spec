@@ -1,10 +1,10 @@
 {
-  "id": "/server-request-open-params",
+  "id": "/server-request-open-params.json",
   "type": "object",
     "properties":  {
-      "client": {"$ref": "/client-options#id"},
-      "user": {"$ref": "/client-options#user"},
-      "messages": {"$ref": "/client-request-body#messages"}
+      "client": {"$ref": "/client-options.json#id"},
+      "user": {"$ref": "/client-options.json#user"},
+      "messages": {"$ref": "/client-request-body.json#messages"}
     }
   }
 }

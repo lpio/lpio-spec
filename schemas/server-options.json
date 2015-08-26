@@ -1,5 +1,5 @@
 {
-  "id": "/server-options",
+  "id": "/server-options.json",
   "title": "Server options",
   "properties": {
     "ackTimeout": {
@@ -7,7 +7,7 @@
       "default": 10000,
       "description": "Amount of ms to wait until message turns undelivered."
     },
-    "multiplex": {"$ref": "/multiplexer-options"},
-    "adapter": {"$ref": "/adapter"}
+    "multiplex": {"$ref": "/multiplexer-options.json"},
+    "adapter": {"$ref": "/adapter.json"}
   }
 }

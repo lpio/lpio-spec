@@ -1,5 +1,5 @@
 {
-  "id": "/client-backoff-options",
+  "id": "/client-backoff-options.json",
   "title": "Backoff options schema.",
   "type": "object",
   "required": false,

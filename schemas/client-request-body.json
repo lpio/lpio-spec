@@ -1,16 +1,16 @@
 {
-  "id": "/client-request-body",
+  "id": "/client-request-body.json",
   "title": "Request body schema.",
   "type": "object",
   "properties": {
-    "client": {"$ref": "/client-options#id"},
-    "user": {"$ref": "/client-options#user"},
+    "client": {"$ref": "/client-options.json#id"},
+    "user": {"$ref": "/client-options.json#user"},
     "messages": {
       "type": "array",
       "required": false,
       "default": [],
       "description": "Messages array.",
-      "items": {"$ref": "/message"}
+      "items": {"$ref": "/message.json"}
     }
   }
 }
