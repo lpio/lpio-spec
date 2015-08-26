@@ -1,19 +1,22 @@
 ## LPIO Protocol.
 
+LPIO is designed for scalable stateless architecture.
+
 ### Client
 
-1. There is just one transport - http long polling.
-1. Client sends an XHR POST request with JSON encoded body.
+1. There is just one transport - HTTP Long Polling.
+1. Client sends an XHR POST request with JSON encoded [body](./schemas/client-request-body.json).
 1. Client waits for a response until it gets one, request remains open.
 1. Client aborts currently waiting request to send new messages.
-1. After a successfully finished request clients sends another one.
-1. After a failed request client reconnects using backoff logic.
-1. Client is disconnected when `disconnectedAfter` amount of requests failed.
+1. After a successfully finished request client creates another one.
+1. After a failed request client reconnects using a backoff logic ([backoff options](./schemas/client-backoff-options.json)).
+1. Client is disconnected when amount of failed requests is bigger than `disconnectedAfter` option.
 1. Client is connected when a request was successfull.
-1. Client sends ping request if no message has been received within `pingInterval`.
+1. Client sends ping request if no message has been received within `pingInterval` option.
 1. Client sends client id, user id and messages.
 1. Message is a json defined by this [schema](./schemas/message.json)
 1. Client always sends an "ack" message in response.
+1. Client accumulates messages to reduce amount of requests ([multiplexer options](./schemas/multiplexer-options.json))
 
 ### Server
 

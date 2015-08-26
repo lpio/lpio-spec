@@ -10,10 +10,7 @@ Advantages:
 Consider also:
 - WebSockets loose their advantage when client has a weak internet connection and reconnects often.
 - [Keepalive](https://en.wikipedia.org/wiki/Keepalive) allows us to have a persistent connection on the TCP level.
-- Upgrade or downgrade to websockets or any other transports is error proven.
-
-
-LPIO is designed for scalable stateless architecture.
+- Upgrade or downgrade to websockets or any other transports is error prone.
 
 ## Protocol
 
