@@ -1,4 +1,4 @@
-## Natural language specification.
+## Protocol and API spec.
 
 LPIO is using http long polling technic to achieve bidirectional communication between server and client. Http polling has some advantages against websockets and co. and is still the best choice for chat-like applications.
 
