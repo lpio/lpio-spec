@@ -7,7 +7,6 @@ Client should be emitter.
 Client implements:
 
 - `connect` first time connect, should be done only once
-- `disconnect` abort connection, stop reconnecting
 - `open` opens the request, sends/receives data
 - `send` schedules message to send, subscribes ack is callback is passed
 - `reopen` calls `open` using a backoff stratagy
@@ -49,8 +48,7 @@ We need to be aware that connection can be closed due to lots of different reaso
 
 Client should handle any connection errors the same way:
 
-- Add unsent user and ack messages back to multiplexer.
-- Reopen connection.
+- Call `reopen` and pass unsent messages so they can be sent again.
 
 ## Reconnection backoff.
 

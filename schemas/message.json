@@ -14,22 +14,20 @@
       "required": true,
       "description": "Unique message identifier."
     },
-    "body": {
-      "type": "object",
-      "required": false,
-      "descrption": "Only required when type is 'user'.",
-      "properties": {
-        "recipients": {
-          "type": "array",
-          "required": true,
-          "description": "Recipients can contain any ids, for e.g. user ids, room id."
-        },
-        "data": {
-          "type": "instance",
-          "required": true,
-          "description": "Any kind of data."
-        }
-      }
+    "sender": {
+      "type": "string",
+      "required": true,
+      "description": "Unique sender identifier, user id."
+    },
+    "recipient": {
+      "type": "string",
+      "required": true,
+      "description": "Recipient can be any id, for e.g. user ids, room id."
+    },
+    "data": {
+      "type": "instance",
+      "required": true,
+      "description": "Any kind of data."
     }
   }
 }

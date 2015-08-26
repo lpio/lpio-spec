@@ -8,6 +8,7 @@ Multiplexer implements:
 - `add` add a message.
 - `get` get all `messages`.
 - `reset` forget all messages.
+- `destroy` stop periodical emiting, remove listeners.
 
 Multiplexer will periodically:
 - empty messages store

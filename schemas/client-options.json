@@ -8,11 +8,11 @@
       "required": true,
       "description": "A definite unique client identifier."
     },
-    "uri": {
+    "url": {
       "type": "string",
       "required": false,
       "default": "/lpio",
-      "description": "Uri or path the server will accept request from."
+      "description": "URL or path, the server will accept request from."
     },
     "disconnectedAfter": {
       "type": "number",

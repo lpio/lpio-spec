@@ -1,10 +1,10 @@
-{
+<{
   "id": "/server-options",
   "title": "Server options",
   "properties": {
     "ackTimeout": {
       "type": "number",
-      "default": 40000,
+      "default": 10000,
       "description": "Amount of ms to wait until message turns undelivered."
     },
     "keepAlive": {

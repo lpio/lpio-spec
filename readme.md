@@ -12,20 +12,27 @@ Consider also:
 - [Keepalive](https://en.wikipedia.org/wiki/Keepalive) allows us to have a persistent connection on the TCP level.
 - Upgrade or downgrade to websockets or any other transports is error proven.
 
-## Client
 
-[Client spec](./client.md)
+LPIO is designed for scalable stateless architecture.
 
-[Reference client implementation in javascript](https://github.com/lpio/client-js)
+## Protocol
 
-## Server
+[Protocol](./protocol.md)
 
-[Server spec](./server.md)
+## Client API
 
-[Reference server implementation in node](https://github.com/lpio/server-node)
+[Client API](./client.md)
 
-## Multiplexer
+[Reference client implementation in javascript](https://github.com/lpio/lpio-client-js)
+
+## Server API
+
+[Server API](./server.md)
+
+[Reference server implementation in node](https://github.com/lpio/lpio-server-node)
+
+## Multiplexer API
 
 Is identical for the server and client.
 
-[Spec](./multiplexer.md)
+[Multiplexer API](./multiplexer.md)
