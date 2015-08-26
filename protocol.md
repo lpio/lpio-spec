@@ -6,6 +6,7 @@ LPIO is designed for scalable stateless architecture.
 
 1. There is just one transport - HTTP Long Polling.
 1. Client sends an XHR POST request with JSON encoded [body](./schemas/client-request-body.json) and headers:
+
     ```
     Accept: application/json
     Content-Type: application/json;charset=UTF-8
