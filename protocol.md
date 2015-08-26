@@ -6,7 +6,10 @@ LPIO is designed for scalable stateless architecture.
 
 1. There is just one transport - HTTP Long Polling.
 1. Client sends an XHR POST request with JSON encoded [body](./schemas/client-request-body.json).
-1. Client waits for a response, until it gets one, request remains open.
+1. If client sent messages of type other than"ack", it expects to receive an "ack" message for every corresponding message.
+1. Message of type "ack" has id which corresponds the original message id.
+1. Client expects to get an "ack" message in respond within a timespan defined by `ackTimeout`. If it doesn't - message is considered as undelivered.
+1. Client waits for a response, until it gets one - request remains open.
 1. Client aborts currently waiting request to send new messages.
 1. After a successfully finished request client creates another one.
 1. After a failed request client reconnects using a backoff logic ([backoff options](./schemas/client-backoff-options.json)).
@@ -24,7 +27,7 @@ LPIO is designed for scalable stateless architecture.
 1. Server doesn't respond if it has no new messages.
 1. Server always sends an "ack" message in response to any message type except of "ack".
 1. Server sends a json encoded body defined by this [schema](./schemas/server-response.body.json)
-1. Client accumulates messages to reduce amount of requests ([multiplexer options](./schemas/multiplexer-options.json))
+1. Server accumulates messages to reduce amount of requests ([multiplexer options](./schemas/multiplexer-options.json))
 1. Message is a json defined by this [schema](./schemas/message.json)
 1. The knowledge about connected/disconnected users is not part of LPIO server.
 1. There is noseparate handshake requests, every request has client and user id's.

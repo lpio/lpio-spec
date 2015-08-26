@@ -6,7 +6,12 @@
     "id": {
       "type": "string",
       "required": true,
-      "description": "A definite unique client identifier."
+      "description": "A unique client identifier."
+    },
+    "user": {
+      "type": "string",
+      "required": true,
+      "description": "A unique user identifier."
     },
     "url": {
       "type": "string",
@@ -14,11 +19,17 @@
       "default": "/lpio",
       "description": "URL or path, the server will accept request from."
     },
-    "disconnectedAfter": {
+    "ackTimeout": {
       "type": "number",
       "required": false,
-      "dafault": 5,
-      "description": "A number of attempts until 'discconnected' event will be emitted."
+      "default": 10000,
+      "description": "Time in ms to wait until a message delivery to the server did fail."
+    },
+    "pingInterval": {
+      "type": "number",
+      "required": false,
+      "default": 25000,
+      "description": "Interval in ms a ping message will be scheduled to maintain connected/disconnected state."
     },
     "multiplex": {"$ref": "/multiplexer-options"},
     "backoff": {"$ref": "/client-backoff-options"}

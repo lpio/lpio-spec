@@ -5,7 +5,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": ["user", "ack"],
+      "enum": ["data", "ack", "ping"],
       "required": true,
       "description": "Message type."
     },
@@ -14,11 +14,8 @@
       "required": true,
       "description": "Unique message identifier."
     },
-    "sender": {
-      "type": "string",
-      "required": true,
-      "description": "Unique sender identifier, user id."
-    },
+    "client": {"$ref": "/client-options#id"},
+    "sender": {"$ref": "/client-options#user"},
     "recipient": {
       "type": "string",
       "required": true,
@@ -27,7 +24,7 @@
     "data": {
       "type": "instance",
       "required": true,
-      "description": "Any kind of data."
+      "description": "Any kind of data. If data is given, type should be 'data'."
     }
   }
 }

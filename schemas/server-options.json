@@ -1,4 +1,4 @@
-<{
+{
   "id": "/server-options",
   "title": "Server options",
   "properties": {
@@ -6,16 +6,6 @@
       "type": "number",
       "default": 10000,
       "description": "Amount of ms to wait until message turns undelivered."
-    },
-    "keepAlive": {
-      "type": "number",
-      "default": 25000,
-      "description": "Amount of ms server should keep a connection open."
-    },
-    "disconnectedAfter": {
-      "type": "number",
-      "default": 40000,
-      "description": "Amount of ms until client becomes disconnected if no connection happened during this period."
     },
     "multiplex": {"$ref": "/multiplexer-options"},
     "adapter": {"$ref": "/adapter"}

@@ -4,6 +4,7 @@
   "type": "object",
   "properties": {
     "client": {"$ref": "/client-options#id"},
+    "user": {"$ref": "/client-options#user"},
     "messages": {
       "type": "array",
       "required": false,
