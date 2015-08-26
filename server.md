@@ -2,14 +2,20 @@
 
 Server options [schema](./schemas/server-options.json).
 
-Server should be emitter.
-
 Server implements:
 
-- `open` is called after an incomming http request with a valid session, subscribes for new messages for the user.
-- `close` closes request to the specified client or all clients.
-- `destroy` ends all open requests, removes listeners, destroys adapter.
-- `save` saves a message for one or many recipients.
+- `open` to be called when accepted an incomming http request with a valid user, returns an emitter.
+- `close` closes request to the specified client.
+- `destroy` closes all open requests, removes listeners, destroys adapter.
+- `send` sends a message to a client using adapter
+
+Events from emitter returned by `open`:
+
+- `message` any kind of received message
+- `data` only when received a message of type "data" if data is not empty
+- `close` emitted when messages have to be sent, messages are the first argument
+- `error` always handle errors
+
 
 ## Handling incomming request.
 
@@ -20,14 +26,10 @@ Ensure to maintain only one open request to the same client.
 Request handler calls `open` method which accepts params with [schema](./schemas/server-request-open-params.json)
 
 Method `open` will:
-- save incomming messages.
+- dispatch on messages on adapter
 - get new messages from adapter and add them to multiplexer.
-- listen to adapter for new messages and add them to multiplexer.
-- listen to `drain` event from multiplexer and end request.
-
-## End request.
-
-When end requests, always send messages accumulated by multiplexer.
+- listen to adapters emitter for new messages, add them to multiplexer.
+- listen to `drain` event from multiplexer and close request.
 
 ## Destroy server.
 
@@ -35,9 +37,9 @@ When end requests, always send messages accumulated by multiplexer.
 - remove all listeners
 - destroy adapter
 
-## Save a message.
+## Send a message.
 
-Method `save` will use the adapter to save messages of type "user".
+Method `send` will use the adapter to save messages of type "user".
 
 
 
