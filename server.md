@@ -26,10 +26,10 @@ Ensure to maintain only one open request to the same client.
 Request handler calls `open` method which accepts params with [schema](./schemas/server-request-open-params.json)
 
 Method `open` will:
-- dispatch on messages on adapter
-- get new messages from adapter and add them to multiplexer.
-- listen to adapters emitter for new messages, add them to multiplexer.
-- listen to `drain` event from multiplexer and close request.
+- dispatch messages on adapter
+- get new messages from adapter and add them to multiplexer
+- listen on adapters emitter for new messages, add them to multiplexer
+- listen to `drain` event from multiplexer and close request
 
 ## Destroy server.
 
