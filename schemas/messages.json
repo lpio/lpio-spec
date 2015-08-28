@@ -1,0 +1,9 @@
+{
+  "id": "/messages.json",
+  "title": "Messages schema.",
+  "type": "array",
+  "required": false,
+  "default": [],
+  "description": "Messages array.",
+  "items": {"$ref": "/message.json"}
+}

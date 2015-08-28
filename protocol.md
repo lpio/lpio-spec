@@ -33,5 +33,11 @@ LPIO is designed for scalable stateless architecture.
 1. Server sends a json encoded body defined by this [schema](./schemas/server-response.body.json)
 1. Server accumulates messages to reduce amount of responses ([multiplexer options](./schemas/multiplexer-options.json))
 1. Message is a json defined by this [schema](./schemas/message.json)
+1. State codes are:
+    - 0: "RECONNECT" - request is closed because a new one from the same client has been received.
+    - 1: "NEW_MESSAGES" - new messages are included in the response.
+    - 2: "ERROR" - an error happened.
+    - 3: "SERVER_DESTROYED" - server has been destroyed.
+    - 4: "CLIENT_ABORT" - client or something in between aborted the request. Client won't get it, but you may want to log it within "close" listener.
 1. The knowledge about connected/disconnected users is not a part of LPIO server.
 1. There is no separate handshake requests, every request is signed.

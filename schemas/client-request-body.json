@@ -5,12 +5,6 @@
   "properties": {
     "client": {"$ref": "/client-options.json#id"},
     "user": {"$ref": "/client-options.json#user"},
-    "messages": {
-      "type": "array",
-      "required": false,
-      "default": [],
-      "description": "Messages array.",
-      "items": {"$ref": "/message.json"}
-    }
+    "messages": {"$ref": "/messages.json"}
   }
 }

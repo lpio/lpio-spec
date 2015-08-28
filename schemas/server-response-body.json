@@ -1,0 +1,13 @@
+{
+  "id": "/server-response-body.json",
+  "type": "object",
+    "properties":  {
+      "state": {
+        "type": "number",
+        "required": true,
+        "enum": [0, 1, 2, 3, 4]
+      },
+      "messages": {"$ref": "/messages.json"}
+    }
+  }
+}
