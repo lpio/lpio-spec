@@ -1,0 +1,14 @@
+{
+  "name": "lpio-spec",
+  "version": "0.1.0",
+  "description": "LPIO protocol, spec and runner.",
+  "repository": "https://github.com/lpio/lpio-spec.git",
+  "dependencies": {
+    "mocha": "^2.2.5",
+    "superagent": "^1.3.0"
+  },
+  "scripts": {
+    "test": "mocha ./test"
+  },
+  "license": "MIT"
+}
