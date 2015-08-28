@@ -9,55 +9,260 @@ function request(body, callback) {
     .end(callback)
 }
 
-describe('Ping message', function() {
-  it('should get an ack', function(done) {
-    var ping = {
-      type: 'ping',
-      id: '1',
-      sender: 'a',
-      client: 'aa'
-    }
+describe('Request/response validation', function() {
+  it('should result in error when message has bad client id', function(done) {
     var body = {
       user: 'a',
-      client: 'aa',
-      messages: [ping]
+      messages: []
     }
     request(body, function(err, res) {
-      assert.equal(res.body.state, 1, 'wrong state')
-      var ack = res.body.messages[0]
-      assert.equal(ack.type, 'ack', 'wrong message type')
-      assert.equal(ack.id, ping.id, 'bad message id')
-      assert.equal(typeof ack.client, 'string', 'bad server id')
-      assert.equal(ack.recipient, ping.sender, 'bad recipient')
-      assert.equal(ack.sender, 'server', 'bad sender')
+      assert.equal(res.body.state, 2, 'wrong state')
+      assert.equal(res.body.error, 'Bad "client" param.', 'bad error message')
+      assert.equal(res.body.messages.length, 0, 'bad messages')
       done()
     })
   })
-})
 
-describe('Data message', function() {
-  it('should get an ack', function(done) {
-    var data = {
-      type: 'data',
-      id: '1',
-      sender: 'a',
-      client: 'aa'
+  it('should result in error when message has bad user id', function(done) {
+    var body = {
+      client: 'a',
+      messages: []
     }
+    request(body, function(err, res) {
+      assert.equal(res.body.state, 2, 'wrong state')
+      assert.equal(res.body.error, 'Bad "user" param.', 'bad error message')
+      assert.equal(res.body.messages.length, 0, 'bad messages')
+      done()
+    })
+  })
+
+  it('should result in error when message has bad user id', function(done) {
     var body = {
       user: 'a',
       client: 'aa',
-      messages: [data]
+      messages: [{
+        type: 'ping',
+        sender: 'a',
+        client: 'aa',
+        recipient: 'b'
+      }]
+    }
+    request(body, function(err, res) {
+      assert.equal(res.body.state, 2, 'wrong state')
+      assert.equal(res.body.error, 'Bad message id.', 'bad error message')
+      assert.equal(res.body.messages.length, 0, 'bad messages')
+      done()
+    })
+  })
+
+  it('should result in error when message has bad type', function(done) {
+    var body = {
+      user: 'a',
+      client: 'aa',
+      messages: [{
+        id: '1',
+        type: 'wrong',
+        sender: 'a',
+        client: 'aa',
+        recipient: 'b'
+      }]
+    }
+    request(body, function(err, res) {
+      assert.equal(res.body.state, 2, 'wrong state')
+      assert.equal(res.body.error, 'Bad message type.', 'bad error message')
+      assert.equal(res.body.messages.length, 0, 'bad messages')
+      done()
+    })
+  })
+
+  it('should result in error when message has bad sender', function(done) {
+    var body = {
+      user: 'a',
+      client: 'aa',
+      messages: [{
+        id: '1',
+        type: 'ping',
+        client: 'aa',
+        recipient: 'b'
+      }]
+    }
+    request(body, function(err, res) {
+      assert.equal(res.body.state, 2, 'wrong state')
+      assert.equal(res.body.error, 'Bad message sender.', 'bad error message')
+      assert.equal(res.body.messages.length, 0, 'bad messages')
+      done()
+    })
+  })
+
+  it('should result in error when message has bad client', function(done) {
+    var body = {
+      user: 'a',
+      client: 'aa',
+      messages: [{
+        id: '1',
+        type: 'ping',
+        sender: 'a',
+        recipient: 'b'
+      }]
+    }
+    request(body, function(err, res) {
+      assert.equal(res.body.state, 2, 'wrong state')
+      assert.equal(res.body.error, 'Bad message client.', 'bad error message')
+      assert.equal(res.body.messages.length, 0, 'bad messages')
+      done()
+    })
+  })
+
+  it('should result in error when ack message has bad recipient', function(done) {
+    var body = {
+      user: 'a',
+      client: 'aa',
+      messages: [{
+        id: '1',
+        type: 'ack',
+        sender: 'a',
+        client: 'aa',
+        recipient: 'wrong'
+      }]
+    }
+    request(body, function(err, res) {
+      assert.equal(res.body.state, 2, 'wrong state')
+      assert.equal(res.body.error, 'Bad ack message recipient.', 'bad error message')
+      assert.equal(res.body.messages.length, 0, 'bad messages')
+      done()
+    })
+  })
+
+  it('should result in error when ping message has bad recipient', function(done) {
+    var body = {
+      user: 'a',
+      client: 'aa',
+      messages: [{
+        id: '1',
+        type: 'ping',
+        sender: 'a',
+        client: 'aa',
+        recipient: 'wrong'
+      }]
+    }
+    request(body, function(err, res) {
+      assert.equal(res.body.state, 2, 'wrong state')
+      assert.equal(res.body.error, 'Bad ping message recipient.', 'bad error message')
+      assert.equal(res.body.messages.length, 0, 'bad messages')
+      done()
+    })
+  })
+
+  it('should result in error when data message has bad recipient', function(done) {
+    var body = {
+      user: 'a',
+      client: 'aa',
+      messages: [{
+        id: '1',
+        type: 'data',
+        sender: 'a',
+        client: 'aa',
+        data: 'something'
+      }]
+    }
+    request(body, function(err, res) {
+      assert.equal(res.body.state, 2, 'wrong state')
+      assert.equal(res.body.error, 'Bad message recipient.', 'bad error message')
+      assert.equal(res.body.messages.length, 0, 'bad messages')
+      done()
+    })
+  })
+
+  it('should result in error when data message has no data', function(done) {
+    var body = {
+      user: 'a',
+      client: 'aa',
+      messages: [{
+        id: '1',
+        type: 'data',
+        sender: 'a',
+        client: 'aa',
+        recipient: 'b'
+      }]
+    }
+    request(body, function(err, res) {
+      assert.equal(res.body.state, 2, 'wrong state')
+      assert.equal(res.body.error, 'Bad message data.', 'bad error message')
+      assert.equal(res.body.messages.length, 0, 'bad messages')
+      done()
+    })
+  })
+
+  it('should result in error when data message received bad ack', function(done) {
+    var body = {
+      user: 'a',
+      client: 'aa',
+      messages: [{
+        id: '1',
+        type: 'data',
+        sender: 'a',
+        client: 'aa',
+        recipient: 'b',
+        data: 'something'
+      }]
     }
     request(body, function(err, res) {
       assert.equal(res.body.state, 1, 'wrong state')
-      var ack = res.body.messages[0]
-      assert.equal(ack.type, 'ack', 'wrong message type')
-      assert.equal(ack.id, data.id, 'bad message id')
-      assert.equal(typeof ack.client, 'string', 'bad server id')
-      assert.equal(ack.recipient, data.sender, 'bad recipient')
-      assert.equal(ack.sender, 'server', 'bad sender')
+      var msg = res.body.messages[0]
+      assert.equal(msg.id, '1', 'bad ack id')
+      assert.equal(msg.type, 'ack', 'bad ack type')
+      assert.equal(msg.sender, 'server', 'bad ack sender')
+      assert.equal(typeof msg.client, 'string', 'bad ack client')
+      assert.equal(msg.recipient, body.user, 'bad ack recipient')
       done()
     })
+  })
+
+  it('should result in error when ping message received bad ack', function(done) {
+    var body = {
+      user: 'a',
+      client: 'aa',
+      messages: [{
+        id: '1',
+        type: 'ping',
+        sender: 'a',
+        client: 'aa',
+        recipient: 'server'
+      }]
+    }
+    request(body, function(err, res) {
+      assert.equal(res.body.state, 1, 'wrong state')
+      var msg = res.body.messages[0]
+      assert.equal(msg.id, '1', 'bad ack id')
+      assert.equal(msg.type, 'ack', 'bad ack type')
+      assert.equal(msg.sender, 'server', 'bad ack sender')
+      assert.equal(typeof msg.client, 'string', 'bad ack client')
+      assert.equal(msg.recipient, body.user, 'bad ack recipient')
+      done()
+    })
+  })
+
+  it('should not answer to ack messages', function(done) {
+    var body = {
+      user: 'a',
+      client: 'aa',
+      messages: [{
+        id: '1',
+        type: 'ack',
+        sender: 'a',
+        client: 'aa',
+        recipient: 'server'
+      }]
+    }
+    var req = request(body, function(err, res) {
+      assert(false, 'no response')
+      done()
+    })
+    setTimeout(function() {
+      req.abort()
+      done()
+    }, 1000)
+
   })
 })
 
@@ -76,6 +281,26 @@ describe('Long polling', function() {
       req.abort()
       done()
     }, 1000)
+  })
+})
+
+describe('When new request comes from the same client', function() {
+  it('should close the current one', function(done) {
+    var body = {
+      user: 'a',
+      client: 'aa',
+      messages: []
+    }
+    var secondReq
+
+    request(body, function(err, res) {
+      assert.equal(res.body.state, 0, 'wrong state')
+      secondReq.abort()
+      done()
+    })
+    setTimeout(function() {
+      secondReq = request(body, function() {})
+    }, 100)
   })
 })
 
@@ -130,7 +355,7 @@ describe('Dialog between user a and b', function() {
     var questionAck = {
       id: question.id,
       type: 'ack',
-      user: 'b',
+      sender: 'b',
       client: 'bb',
       recipient: 'server'
     }
@@ -168,7 +393,7 @@ describe('Dialog between user a and b', function() {
       messages: [{
         id: answer.id,
         type: 'ack',
-        user: 'a',
+        sender: 'a',
         client: 'aa',
         recipient: 'server'
       }]

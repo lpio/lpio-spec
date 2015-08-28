@@ -42,5 +42,10 @@ Method `open` will:
 Method `send` will use the adapter to save messages of type "user".
 
 
+# Adapter.
+
+Adapter is a class implementing a storage abstraction which can be used by the server to propagate events events between servers and make them persistent.
+
+
 
 
