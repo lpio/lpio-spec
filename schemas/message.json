@@ -5,7 +5,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": ["data", "ack"],
+      "enum": ["data", "ack", "option"],
       "required": true,
       "description": "Message type."
     },
