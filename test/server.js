@@ -41,10 +41,11 @@ describe('Request/response validation', function() {
       user: 'a',
       client: 'aa',
       messages: [{
-        type: 'ping',
+        type: 'data',
         sender: 'a',
         client: 'aa',
-        recipient: 'b'
+        recipient: 'b',
+        data: 'something'
       }]
     }
     request(body, function(err, res) {
@@ -81,9 +82,10 @@ describe('Request/response validation', function() {
       client: 'aa',
       messages: [{
         id: '1',
-        type: 'ping',
+        type: 'data',
         client: 'aa',
-        recipient: 'b'
+        recipient: 'b',
+        data: 'something'
       }]
     }
     request(body, function(err, res) {
@@ -100,9 +102,10 @@ describe('Request/response validation', function() {
       client: 'aa',
       messages: [{
         id: '1',
-        type: 'ping',
+        type: 'data',
         sender: 'a',
-        recipient: 'b'
+        recipient: 'b',
+        data: 'something'
       }]
     }
     request(body, function(err, res) {
@@ -128,26 +131,6 @@ describe('Request/response validation', function() {
     request(body, function(err, res) {
       assert.equal(res.body.state, 2, 'wrong state')
       assert.equal(res.body.error, 'Bad ack message recipient.', 'bad error message')
-      assert.equal(res.body.messages.length, 0, 'bad messages')
-      done()
-    })
-  })
-
-  it('should result in error when ping message has bad recipient', function(done) {
-    var body = {
-      user: 'a',
-      client: 'aa',
-      messages: [{
-        id: '1',
-        type: 'ping',
-        sender: 'a',
-        client: 'aa',
-        recipient: 'wrong'
-      }]
-    }
-    request(body, function(err, res) {
-      assert.equal(res.body.state, 2, 'wrong state')
-      assert.equal(res.body.error, 'Bad ping message recipient.', 'bad error message')
       assert.equal(res.body.messages.length, 0, 'bad messages')
       done()
     })
@@ -204,30 +187,6 @@ describe('Request/response validation', function() {
         client: 'aa',
         recipient: 'b',
         data: 'something'
-      }]
-    }
-    request(body, function(err, res) {
-      assert.equal(res.body.state, 1, 'wrong state')
-      var msg = res.body.messages[0]
-      assert.equal(msg.id, '1', 'bad ack id')
-      assert.equal(msg.type, 'ack', 'bad ack type')
-      assert.equal(msg.sender, 'server', 'bad ack sender')
-      assert.equal(typeof msg.client, 'string', 'bad ack client')
-      assert.equal(msg.recipient, body.user, 'bad ack recipient')
-      done()
-    })
-  })
-
-  it('should result in error when ping message received bad ack', function(done) {
-    var body = {
-      user: 'a',
-      client: 'aa',
-      messages: [{
-        id: '1',
-        type: 'ping',
-        sender: 'a',
-        client: 'aa',
-        recipient: 'server'
       }]
     }
     request(body, function(err, res) {

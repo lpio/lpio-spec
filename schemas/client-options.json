@@ -25,11 +25,11 @@
       "default": 10000,
       "description": "Time in ms to wait until a message delivery to the server did fail."
     },
-    "pingInterval": {
+    "responseTimeout": {
       "type": "number",
       "required": false,
       "default": 25000,
-      "description": "Interval in ms a ping message will be scheduled to maintain connected/disconnected state."
+      "description": "Time in ms within client has to receive a message from server before it handles a timeout error."
     },
     "multiplex": {"$ref": "/multiplexer-options.json"},
     "backoff": {"$ref": "/client-backoff-options.json"}
