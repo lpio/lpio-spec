@@ -1,30 +1,9 @@
 {
   "id": "/message.json",
   "title": "Message schema.",
-  "type": "obejct",
-  "properties": {
-    "type": {
-      "type": "string",
-      "enum": ["data", "ack", "option"],
-      "required": true,
-      "description": "Message type."
-    },
-    "id": {
-      "type": "string",
-      "required": true,
-      "description": "Unique message identifier."
-    },
-    "client": {"$ref": "/client-options.json#id"},
-    "sender": {"$ref": "/client-options.json#user"},
-    "recipient": {
-      "type": "string",
-      "required": true,
-      "description": "Recipient can be any id, for e.g. user ids, room id."
-    },
-    "data": {
-      "type": "instance",
-      "required": true,
-      "description": "Any kind of data. If data is given, type should be 'data'."
-    }
-  }
+  "anyOf": [
+    {"$ref": "/message-data.json"},
+    {"$ref": "/message-ack.json"},
+    {"$ref": "/message-option.json"}
+  ]
 }

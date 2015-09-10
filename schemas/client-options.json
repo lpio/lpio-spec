@@ -22,7 +22,7 @@
     "ackTimeout": {
       "type": "number",
       "required": false,
-      "default": 10000,
+      "default": 5000,
       "description": "Time in ms to wait until a message delivery to the server did fail."
     },
     "responseTimeout": {

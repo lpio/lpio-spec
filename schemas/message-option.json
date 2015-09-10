@@ -1,0 +1,30 @@
+{
+  "id": "/message-option.json",
+  "title": "Option message schema.",
+  "type": "obejct",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["option"],
+      "required": true,
+      "description": "Message type."
+    },
+    "id": {
+      "type": "string",
+      "required": true,
+      "description": "Option name."
+    },
+    "client": {"$ref": "/client-options.json#id"},
+    "sender": {"$ref": "/client-options.json#user"},
+    "recipient": {
+      "type": "string",
+      "required": true,
+      "description": "User id."
+    },
+    "data": {
+      "type": "instance",
+      "required": true,
+      "description": "Value corresponding the option. Any data type."
+    }
+  }
+}

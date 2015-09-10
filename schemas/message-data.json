@@ -1,0 +1,30 @@
+{
+  "id": "/message-data.json",
+  "title": "Data message schema.",
+  "type": "obejct",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["data"],
+      "required": true,
+      "description": "Message type."
+    },
+    "id": {
+      "type": "string",
+      "required": true,
+      "description": "Unique message id."
+    },
+    "client": {"$ref": "/client-options.json#id"},
+    "sender": {"$ref": "/client-options.json#user"},
+    "recipient": {
+      "type": "string",
+      "required": true,
+      "description": "Can be any id, for e.g. user ids, room id."
+    },
+    "data": {
+      "type": "instance",
+      "required": true,
+      "description": "Any data type."
+    }
+  }
+}

@@ -1,13 +1,33 @@
 {
   "id": "/server-response-body.json",
   "type": "object",
-    "properties":  {
-      "state": {
-        "type": "number",
-        "required": true,
-        "enum": [0, 1, 2, 3, 4]
-      },
-      "messages": {"$ref": "/messages.json"}
-    }
+  "properties":  {
+    "state": {
+      "required": true,
+      "type": "number",
+      "oneOf": [
+        {
+          "enum": [0],
+          "description": "RECONNECT - request is closed because a new one from the same client has been received."
+        },
+        {
+          "enum": [1],
+          "description": "NEW_MESSAGES - new messages are included in the response."
+        },
+        {
+          "enum": [2],
+          "description": "ERROR - an error happened."
+        },
+        {
+          "enum": [3],
+          "description": "SERVER_DESTROYED - server has been destroyed"
+        }
+        {
+          "enum": [4],
+          "description": "CLIENT_ABORT - client or something in between aborted the request. Client won't get it, but you may want to log it within 'close' listener."
+        }
+      ]
+    },
+    "messages": {"$ref": "/messages.json"}
   }
 }
