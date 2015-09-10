@@ -225,6 +225,24 @@ describe('Request/response validation', function() {
   })
 })
 
+describe.only('Request without valid client id', function() {
+  it('should respond with option message', function(done) {
+    var body = {
+      user: 'a',
+      messages: []
+    }
+    request(body, function(err, res) {
+      assert.equal(res.body.state, 1, 'wrong state')
+      assert.equal(res.body.messages.length, 1, 'just one message')
+      var message = res.body.messages[0]
+      assert.equal(message.type, 'option', 'bad message type')
+      assert.equal(message.id, 'client', 'bad message id')
+      assert.equal(typeof message.data, 'string', 'bad message data')
+      done()
+    })
+  })
+})
+
 describe('Long polling', function() {
   it('should not respond for a long', function(done) {
     var body = {
