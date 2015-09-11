@@ -12,14 +12,8 @@
     "id": {
       "type": "string",
       "required": true,
+      "enum": ["client"],
       "description": "Option name."
-    },
-    "client": {"$ref": "/client-options.json#id"},
-    "sender": {"$ref": "/client-options.json#user"},
-    "recipient": {
-      "type": "string",
-      "required": true,
-      "description": "User id."
     },
     "data": {
       "type": "instance",

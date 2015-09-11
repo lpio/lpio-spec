@@ -14,9 +14,7 @@
       "required": true,
       "description": "Unique message id."
     },
-    "client": {"$ref": "/client-options.json#id"},
-    "sender": {"$ref": "/client-options.json#user"},
-    "recipient": {
+    "channel": {
       "type": "string",
       "required": true,
       "description": "Can be any id, for e.g. user ids, room id."

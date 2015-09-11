@@ -5,13 +5,8 @@
   "properties": {
     "id": {
       "type": "string",
-      "required": true,
+      "required": false,
       "description": "A unique client identifier."
-    },
-    "user": {
-      "type": "string",
-      "required": true,
-      "description": "A unique user identifier."
     },
     "url": {
       "type": "string",
@@ -22,7 +17,7 @@
     "ackTimeout": {
       "type": "number",
       "required": false,
-      "default": 5000,
+      "default": 1000,
       "description": "Time in ms to wait until a message delivery to the server did fail."
     },
     "responseTimeout": {

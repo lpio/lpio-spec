@@ -36,4 +36,4 @@ LPIO is designed for scalable stateless architecture.
 1. Message is a json defined by this [schema](./schemas/message.json)
 1. The knowledge about connected/disconnected users is not a part of LPIO server.
 1. There is no separate handshake requests, every request is signed.
-1. If user is unauthorized, server should respond with `403` http status code.
+1. If client is unauthorized, server should respond with `403` http status code.

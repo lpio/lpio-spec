@@ -4,7 +4,7 @@ Server options [schema](./schemas/server-options.json).
 
 Server implements:
 
-- `open` to be called when accepted an incomming http request with a valid user, returns an emitter.
+- `open` to be called when accepted an incomming http request with a valid client, returns an emitter.
 - `close` closes request to the specified client.
 - `destroy` closes all open requests, removes listeners, destroys adapter.
 - `send` sends a message to a client using adapter
@@ -36,10 +36,6 @@ Method `open` will:
 - end all requests.
 - remove all listeners
 - destroy adapter
-
-## Send a message.
-
-Method `send` will use the adapter to save messages of type "user".
 
 
 # Adapter.

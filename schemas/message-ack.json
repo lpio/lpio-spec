@@ -13,13 +13,6 @@
       "type": "string",
       "required": true,
       "description": "This id is the message id ack is sent for."
-    },
-    "client": {"$ref": "/client-options.json#id"},
-    "sender": {"$ref": "/client-options.json#user"},
-    "recipient": {
-      "type": "string",
-      "required": true,
-      "description": "Can be any id, for e.g. user ids, room id."
     }
   }
 }

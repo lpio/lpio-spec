@@ -3,8 +3,6 @@
   "title": "Request body schema.",
   "type": "object",
   "properties": {
-    "client": {"$ref": "/client-options.json#id"},
-    "user": {"$ref": "/client-options.json#user"},
     "messages": {"$ref": "/messages.json"}
   }
 }
