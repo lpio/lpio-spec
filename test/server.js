@@ -3,8 +3,8 @@ var superagent = require('superagent')
 
 function request(client, body, callback) {
   return superagent
-    .set('LPIO-Client', client)
     .post('http://localhost:3000/lpio')
+    .set('LPIO-Client', client)
     .send(body)
     .set('Accept', 'application/json')
     .end(callback)
