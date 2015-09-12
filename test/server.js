@@ -158,23 +158,23 @@ describe('When new request comes from the same client', function() {
       done()
     })
     setTimeout(function() {
-      secondReq = request(body, function() {})
+      secondReq = request('a', body, function() {})
     }, 100)
   })
 })
 
-describe('Dialog between user a and b', function() {
+describe('Dialog between user a and b:', function() {
   var question = {
     type: 'data',
     id: '1',
-    channel: 'b',
+    channel: 'c',
     data: 'question'
   }
 
   var answer = {
     type: 'data',
     id: '2',
-    channel: 'b',
+    channel: 'c',
     data: 'answer'
   }
 
