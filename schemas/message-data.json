@@ -16,7 +16,7 @@
     },
     "channel": {
       "type": "string",
-      "required": true,
+      "required": false,
       "description": "Can be any id, for e.g. user ids, room id."
     },
     "data": {

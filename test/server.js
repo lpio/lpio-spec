@@ -43,21 +43,6 @@ describe('Request/response validation', function() {
     })
   })
 
-  it('should result in error when data message has bad channel', function(done) {
-    var body = {
-      messages: [{
-        id: '1',
-        type: 'data',
-        data: 'something'
-      }]
-    }
-    request('a', body, function(err, res) {
-      assert.equal(res.body.state, 2, 'wrong state')
-      assert.equal(res.body.error, 'Bad message channel.', 'bad error message')
-      assert.equal(res.body.messages.length, 0, 'bad messages')
-      done()
-    })
-  })
 
   it('should result in error when data message has bad data', function(done) {
     var body = {
