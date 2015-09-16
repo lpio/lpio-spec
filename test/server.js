@@ -103,12 +103,9 @@ describe('Request without valid client id', function() {
       messages: []
     }
     request('', body, function(err, res) {
-      assert.equal(res.body.state, 1, 'wrong state')
-      assert.equal(res.body.messages.length, 1, 'just one message')
-      var message = res.body.messages[0]
-      assert.equal(message.type, 'option', 'bad message type')
-      assert.equal(message.id, 'client', 'bad message id')
-      assert.equal(typeof message.data, 'string', 'bad message data')
+      assert.equal(res.body.state, 0, 'wrong state')
+      assert.equal(res.body.messages.length, 0, 'no messages')
+      assert.equal(typeof res.body.set.id, 'string', 'bad client id')
       done()
     })
   })

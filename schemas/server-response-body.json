@@ -8,7 +8,7 @@
       "oneOf": [
         {
           "enum": [0],
-          "description": "RECONNECT - request is closed because a new one from the same client has been received."
+          "description": "RECONNECT - request is closed because a new one from the same client has been received or client id has been regenerated."
         },
         {
           "enum": [1],
@@ -28,6 +28,17 @@
         }
       ]
     },
-    "messages": {"$ref": "/messages.json"}
+    "messages": {"$ref": "/messages.json"},
+    "set": {
+      "type": "object",
+      "required": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "required": false,
+          "description": "Value for the client id."
+        }
+      }
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "/message-data.json",
   "title": "Data message schema.",
-  "type": "obejct",
+  "type": "object",
   "properties": {
     "type": {
       "type": "string",
