@@ -3,7 +3,6 @@
   "title": "Message schema.",
   "anyOf": [
     {"$ref": "/message-data.json"},
-    {"$ref": "/message-ack.json"},
-    {"$ref": "/message-option.json"}
+    {"$ref": "/message-ack.json"}
   ]
 }
